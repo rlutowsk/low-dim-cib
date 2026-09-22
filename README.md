@@ -101,3 +101,18 @@ This may be seen as a common task when one works with CARAT. It is a process of 
 > - `queue`: Redis list containing the CARAT names of crystallographic groups. This is the input queue.
 > - `set`: Redis set containing groups which are currently being calculated. In the case of a crash of a worker process, the name remains and can be moved to the input queue.
 > - `key`: this is for the generating functions - the name of the Redis hash key which stores the calculated vector systems (cocycle data) for CIB structure on given crystallographic group.
+
+# Reading the data
+
+The data were exported to files in JSON format. For every Z-class we have the following fields:
+
+- `dim`: the dimension of the group
+- `name`: the name of the Z-class of the group
+- `size`: the order of the group
+- `generators`: matrices generating the group
+- `normalizer`: matrices generating the normalizer of the group in GL(dim,Z)
+- `aff`: list of records correspoding to the affine classes (crystallographic groups) in the given Z-class, with the following entries:
+
+    - `no`: number of the extension in CARAT catalogue
+    - `vs`: vector system; the images of the cocycle under the generators to be precise
+    - `cib`: list of vector systems (as in `vs`) that correspond to representatives of isomorphism classes of cofinite integral braces with given crystallographic multiplicative group
