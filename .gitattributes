@@ -1,0 +1,5 @@
+data/z.right.grp.gz filter=lfs diff=lfs merge=lfs -text
+data/c.left.grp.gz filter=lfs diff=lfs merge=lfs -text
+data/c.right.grp.gz filter=lfs diff=lfs merge=lfs -text
+data/torsionfree.grp.gz filter=lfs diff=lfs merge=lfs -text
+data/z.left.grp.gz filter=lfs diff=lfs merge=lfs -text
