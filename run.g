@@ -55,12 +55,18 @@ CIBRunJob1 := function(queue, set, key)
 end;
 #CIBRunJob("input", "running", "cib:f" : force:=true);
 
-CIBRunJobCheck := function(queue, set)
-    local name, context, err;
+CIBRunJobCheck := function(queue, set, max_iters)
+    local name, context, err, cnt;
 
     context := ValueOption("context")=true;
 
+    cnt := 0;
     while true do
+        cnt := cnt+1;
+        if cnt = max_iters then
+            Info(InfoCaratCat, 1, "Maximum number of iterations reached, quitting ...");
+            QuitGap(1);
+        fi;
         name := CIBFetchName(queue, set);
         if name = fail then
             QuitGap(0);
@@ -70,7 +76,7 @@ CIBRunJobCheck := function(queue, set)
             RedisCommand("SADD error {}", name);
         fi;
         CIBRemoveName( name, set );
-        Info( InfoCaratCat, 1, name, ": ", err);
+        Info( InfoCaratCat, 1, cnt, " - ", name, ": ", err);
     od;
 end;
-CIBRunJobCheck( "ainput", "arunning" );
+CIBRunJobCheck( "ainput", "arunning", 3 );

@@ -80,7 +80,7 @@ CheckCoboundary := function( zname )
     z := CaratCatFetchZClass( zname );
     s := CaratCatFetchAffineCrystGroup( Concatenation(zname,".0") );
 
-    cbz := List( CoboundaryBasisIntOnRightByGens( z.generators ), Concatenation );
+    cbz := List( CIB.CoboundaryBasisIntOnRightByGens( z.generators ), Concatenation );
     cbs := List( CoboundaryBasisInt( s ), Concatenation );
 
     msz := ComplementIntMat( cbs, cbz );
